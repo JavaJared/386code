@@ -29,8 +29,31 @@ void resize(int width, int height) {
 	frameBuffer.setFrameBufferSize(width, height);
 	glutPostRedisplay();
 }
+
+void f(int &v) { //pass by reference
+	v++;
+}
+
+//computes the hypotenuse from leg a and leg b
+double hypot(double a, double b) {
+	return sqrt(a * a + b * b);
+}
+
+//changes two values to the max of those values
+void makeMax(int &a, int &b) {
+	if (a > b) {
+		b = a;
+	}
+	else {
+		a = b;
+	}
+}
+
 int main(int argc, char* argv[]) {
-	// some code from Wednesday's class
+
+	int x = 7, y = 99;
+	makeMax(x, y);
+	cout << x << " " << y << endl;
 
 	return 0;
 }
