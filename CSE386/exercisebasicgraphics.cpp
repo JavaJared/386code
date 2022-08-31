@@ -49,11 +49,13 @@ void makeMax(int &a, int &b) {
 	}
 }
 
+
 int main(int argc, char* argv[]) {
 
-	int x = 7, y = 99;
-	makeMax(x, y);
-	cout << x << " " << y << endl;
+	// This is where you will do your testing of the functions
+		// you implement in utilities.cpp
+	
+	cout << areaOfTriangle(10.0, 2.0, 4.0) << endl;
 
 	return 0;
 }

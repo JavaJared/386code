@@ -26,7 +26,9 @@
   */
 
 void swap(double& a, double& b) {
-	/* CSE 386 - todo  */
+	double temp = a;
+	a = b;
+	b = temp;
 }
 
 /**
@@ -42,8 +44,12 @@ void swap(double& a, double& b) {
 */
 
 bool approximatelyEqual(double a, double b) {
-	/* CSE 386 - todo  */
-	return false;
+	if (abs(a - b) < EPSILON) {
+		return true;
+	}
+	else {
+		return false;
+	}
 }
 
 /**
@@ -58,8 +64,12 @@ bool approximatelyEqual(double a, double b) {
  */
 
 bool approximatelyZero(double a) {
-	/* CSE 386 - todo  */
-	return false;
+	if (approximatelyEqual(a, 0)) {
+		return true;
+	}
+	else {
+		return false;
+	}
 }
 
 /**
@@ -77,8 +87,8 @@ bool approximatelyZero(double a) {
  */
 
 double normalizeDegrees(double degrees) {
-	/* CSE 386 - todo  */
-	return 0;
+	double normalDegrees = glm::mod(degrees, 360.0);
+	return normalDegrees;
 }
 
 /**
@@ -96,8 +106,8 @@ double normalizeDegrees(double degrees) {
  */
 
 double normalizeRadians(double rads) {
-	/* CSE 386 - todo  */
-	return 0;
+	double normalRads = glm::mod(rads, TWO_PI);
+	return normalRads;
 }
 
 /**
@@ -110,8 +120,8 @@ double normalizeRadians(double rads) {
  */
 
 double rad2deg(double rads) {
-	/* CSE 386 - todo  */
-	return 0;
+	double degrees = rads * (180 / PI);
+	return degrees;
 }
 
 /**
@@ -124,8 +134,8 @@ double rad2deg(double rads) {
  */
 
 double deg2rad(double degs) {
-	/* CSE 386 - todo  */
-	return 0;
+	double rads = degs * (PI / 180);
+	return rads;
 }
 
 /**
@@ -139,8 +149,8 @@ double deg2rad(double degs) {
 */
 
 double min(double a, double b, double c) {
-	/* CSE 386 - todo  */
-	return 0;
+	double minimum = glm::min(glm::min(a, b), c);
+	return minimum;
 }
 
 /**
@@ -154,27 +164,8 @@ double min(double a, double b, double c) {
 */
 
 double max(double a, double b, double c) {
-	/* CSE 386 - todo  */
-	return 0;
-}
-
-/**
-* @fn	distanceFromOrigin(double x, double y)
-* @brief	Determines the distance of the point (x, y) to (0, 0).
-* The distance is defined by sqrt(x^2 + y^2). Note: ^ is not how
-* C++ does exponentiation; you can use glm::pow instead.
-* @param	x	The x coordinate
-* @param	y	The 7 coordinate.
-* @return	The distance of (x, y) to the origin.
-* @test	distanceFromOrigin(0, 1) --> 1.0
-* @test	distanceFromOrigin(1, 0) --> 1.0
-* @test	distanceFromOrigin(1, 1) --> 1.41421356237309514547
-* @test	distanceFromOrigin(-10, 30) --> 31.62277660168379256334
-*/
-
-double distanceFromOrigin(double x, double y) {
-	/* CSE 386 - todo  */
-	return 0;
+	double maximum = glm::max(glm::max(a, b), c);
+	return maximum;
 }
 
 /**
@@ -195,9 +186,29 @@ double distanceFromOrigin(double x, double y) {
 */
 
 double distanceBetween(double x1, double y1, double x2, double y2) {
-	/* CSE 386 - todo  */
-	return 0;
+	double distance = sqrt(glm::pow((x1 - x2), 2) + glm::pow((y1 - y2), 2));
+	return distance;
 }
+/**
+* @fn	distanceFromOrigin(double x, double y)
+* @brief	Determines the distance of the point (x, y) to (0, 0).
+* The distance is defined by sqrt(x^2 + y^2). Note: ^ is not how
+* C++ does exponentiation; you can use glm::pow instead.
+* @param	x	The x coordinate
+* @param	y	The 7 coordinate.
+* @return	The distance of (x, y) to the origin.
+* @test	distanceFromOrigin(0, 1) --> 1.0
+* @test	distanceFromOrigin(1, 0) --> 1.0
+* @test	distanceFromOrigin(1, 1) --> 1.41421356237309514547
+* @test	distanceFromOrigin(-10, 30) --> 31.62277660168379256334
+*/
+
+double distanceFromOrigin(double x, double y) {
+	double distance = distanceBetween(0, 0, x, y);
+	return distance;
+}
+
+
 
 /**
  * @fn	double areaOfTriangle(double a, double b, double c)
@@ -213,8 +224,15 @@ double distanceBetween(double x1, double y1, double x2, double y2) {
  */
 
 double areaOfTriangle(double a, double b, double c) {
-	/* CSE 386 - todo  */
-	return 0;
+	double s = (a + b + c) / 2;
+	double area = sqrt(s * (s - a) * (s - b) * (s - c));
+	if ((a < 0 || b < 0) || c < 0) {
+		area = -1;
+	}
+	if (isnan(area)) {
+		area = -1;
+	}
+	return area;
 }
 
 /**
@@ -232,8 +250,11 @@ double areaOfTriangle(double a, double b, double c) {
  */
 
 double areaOfTriangle(double x1, double y1, double x2, double y2, double x3, double y3) {
-	/* CSE 386 - todo  */
-	return 0;
+	double a = distanceBetween(x1, y1, x2, y2);
+	double b = distanceBetween(x2, y2, x3, y3);
+	double c = distanceBetween(x3, y3, x1, y1);
+	double area = areaOfTriangle(a, b, c);
+	return area;
 }
 /**
  * @fn	void pointOnUnitCircle(double angleRads, double &x, double &y)
@@ -245,8 +266,8 @@ double areaOfTriangle(double x1, double y1, double x2, double y2, double x3, dou
  */
 
 void pointOnUnitCircle(double angleRads, double& x, double& y) {
-	/* CSE 386 - todo  */
-	x = y = 0;
+	x = std::cos(angleRads);
+	y = std::sin(angleRads);
 }
 
 /**
